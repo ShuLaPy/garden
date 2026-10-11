@@ -21,7 +21,7 @@ This gave birth to **Artificial Neural Networks (ANNs)** — the foundation of D
 
 
 
-![[brain_neuron.png]]
+![Brain neuron](/images/notes/brain_neuron.png)
 
 
 A neuron in the brain is a specialized cell that transmits information using electrical and chemical signals. It has four main parts:
@@ -79,7 +79,7 @@ This excitatory/inhibitory mechanism maps directly onto **signed weights** in an
 
 Scientists translated this biological process into a mathematical model. This is called an **artificial neuron** or **perceptron**.
 
-![[perceptron.png]]
+![Perceptron](/images/notes/perceptron.png)
 
 |Biological Neuron|Artificial Neuron (Equivalent)|
 |---|---|
@@ -128,7 +128,7 @@ Step 2: Activation Function
 
 Just like the brain doesn't rely on a single neuron but on **networks of neurons organized in layers/regions** (e.g., visual cortex for sight, auditory cortex for sound), Deep Learning uses **layers of artificial neurons**:
 
-![[neural_network.png]]
+![Neural network](/images/notes/neural_network.png)
 
 - **Input Layer** → receives raw data (like sensory organs receiving stimuli)
 - **Hidden Layers** → process and extract patterns (like brain regions processing information step-by-step, e.g., edges → shapes → objects in vision)

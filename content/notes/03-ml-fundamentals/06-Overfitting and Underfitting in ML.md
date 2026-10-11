@@ -52,7 +52,7 @@ This drove the development of a whole toolbox of countermeasures — including *
 Let's return to your salary-vs-experience example from the MSE/MAE/RMSE notes. Suppose the _true_ underlying relationship between experience and salary isn't perfectly linear — maybe salary growth slightly tapers off at higher experience levels, plus there's some natural randomness (noise) in any real salary dataset.
 
 
-![[diagram_fit_comparison.png]]
+![Fit comparison](/images/notes/diagram_fit_comparison.png)
 
 > Three side-by-side scatter plots comparing underfitting with a straight line that misses the curve, a good fit with a moderate curve matching the pattern, and overfitting with a wildly wiggly curve passing through nearly every point
 
@@ -87,7 +87,7 @@ Before the formulas, here's the intuition almost everyone reaches for when learn
 - **Bias** is how far off-center your darts land, _on average_. If every dart consistently lands in roughly the same spot away from the bullseye, that's high bias — your model is systematically wrong in the same direction every time, because it's too simple to represent the true pattern.
 - **Variance** is how _spread out_ your darts are from each other. If your darts scatter all over the board — sometimes near the bullseye, sometimes far, in different directions each time you throw — that's high variance, because your model is too sensitive to the specific quirks of whatever training data it happened to see.
 
-![[diagram_bias_variance_darts.png]]
+![Bias variance darts](/images/notes/diagram_bias_variance_darts.png)
 
 
 > Four dartboards showing every combination of bias and variance: tightly clustered on target for low bias and low variance, scattered but centered for low bias and high variance, tightly clustered but off-target for high bias and low variance, and scattered and off-target for high bias and high variance
@@ -135,7 +135,7 @@ $$ \text{Total Error}(complexity) = \underbrace{\text{Bias}(complexity)^2}_{\tex
 
 ### 4.7 Geometric Interpretation
 
-![[diagram_bias_variance_tradeoff.png]]
+![Bias variance tradeoff](/images/notes/diagram_bias_variance_tradeoff.png)
 
 > A line chart showing bias squared decreasing, variance increasing, and total error forming a U-shape as model complexity increases, with a green marker showing the optimal sweet spot
 
@@ -145,7 +145,7 @@ _As model complexity increases (moving right), bias (blue) steadily drops — a 
 
 Beyond the bias-variance curve, overfitting can be spotted directly during the training process itself, by watching training loss and validation loss (using the cost function ideas from your earlier notes) across training iterations/epochs:
 
-![[diagram_train_val_loss.png]]
+![Train val loss](/images/notes/diagram_train_val_loss.png)
 
 > A line chart showing training loss steadily decreasing over epochs while validation loss decreases initially then turns upward, marking where overfitting begins
 

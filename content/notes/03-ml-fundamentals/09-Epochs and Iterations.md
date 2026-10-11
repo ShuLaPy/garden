@@ -48,7 +48,7 @@ One **iteration** is: take one batch, run it through the model, compute the loss
 
 One **epoch** is complete once every example in the dataset has been used in exactly one batch — in other words, once you've marched through _all_ the batches, one iteration at a time, and covered the whole dataset. If the dataset doesn't split evenly into batches, the last batch of the epoch is simply smaller than the rest (more on this in Section 4).
 
-![[epoch_iteration_structure.png]]
+![Epoch iteration structure](/images/notes/epoch_iteration_structure.png)
 
 > Schematic showing a dataset of 23 examples split into 5 batches of size 5, 5, 5, 5, and 3, each batch labeled as one iteration, with a bracket showing all 5 iterations together making up 1 epoch
 
@@ -116,7 +116,7 @@ So this training run performs the gradient descent update rule $\theta := \theta
 
 **How the count changes with batch size**, still with $N=23$:
 
-![[iterations_per_epoch_batchsize.png]]
+![Iterations per epoch batchsize](/images/notes/iterations_per_epoch_batchsize.png)
 
 > Bar chart showing iterations per epoch for batch sizes 1, 4, 5, and 23, given a dataset of 23 examples, with values 23, 6, 5, and 1 respectively
 
@@ -144,7 +144,7 @@ With full-batch training, one epoch _is_ one iteration — the two concepts coll
 
 **Too many epochs → overfitting.** Push training too far in the other direction, and something more subtle goes wrong: the _training_ loss keeps dropping, but performance on data the model hasn't seen (measured with a held-out **validation set**) starts getting _worse_. The model isn't learning general patterns anymore — it's starting to memorize quirks specific to the training examples.
 
-![[train_val_loss_epochs.png]]
+![Train val loss epochs](/images/notes/train_val_loss_epochs.png)
 
 > Line chart of training loss steadily decreasing across 20 epochs, and validation loss decreasing until around epoch 10 then increasing again, with a dashed line marking the early stopping point at epoch 10
 
@@ -156,7 +156,7 @@ In this example, training loss keeps falling smoothly all the way to epoch 20, b
 
 **Batch size also affects how noisy your iteration-level loss looks**, independent of epochs or overfitting:
 
-![[loss_per_iteration_batchsize_noise.png]]
+![Loss per iteration batchsize noise](/images/notes/loss_per_iteration_batchsize_noise.png)
 
 > Line chart comparing loss per iteration for a small batch size, which is very noisy iteration-to-iteration, versus a large batch size, which is smooth, both following the same overall downward trend across 3 epochs marked by dashed vertical lines
 

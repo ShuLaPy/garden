@@ -180,15 +180,15 @@ $$ \left| \frac{\partial J}{\partial \theta} \right| < \epsilon $$
 
 ### 4.5 Geometric Interpretation
 
-![Line chart comparing cost J against iteration number for three learning rates: a good rate that smoothly flattens, a too small rate that decreases very slowly, and a too large rate that diverges upward](https://claude.ai/chat/images/diagram_alpha_cost_vs_iteration.png)
+![Line chart comparing cost J against iteration number for three learning rates: a good rate that smoothly flattens, a too small rate that decreases very slowly, and a too large rate that diverges upward](/images/notes/diagram_alpha_cost_vs_iteration.png)
 
 _The green curve (good $\alpha$) drops quickly and flattens — clear convergence. The blue curve (too small $\alpha$) is still visibly falling at iteration 30 — it will converge eventually, just wastefully slowly. The red curve (too large $\alpha$) doesn't settle at all — it's overshooting the minimum on every step, and the cost is actually increasing over time. This is the exact plot a convergence algorithm is "reading" automatically, instead of a human eyeballing a graph._
 
-![Contour map of the cost surface viewed from above, showing three gradient descent paths: a smooth green path converging to the center, a slow blue path barely moving, and a zigzagging red path bouncing between the walls of the valley](https://claude.ai/chat/images/diagram_alpha_contour_paths.png)
+![Contour map of the cost surface viewed from above, showing three gradient descent paths: a smooth green path converging to the center, a slow blue path barely moving, and a zigzagging red path bouncing between the walls of the valley](/images/notes/diagram_alpha_contour_paths.png)
 
 _Viewed from directly above the bowl-shaped cost surface (like a topographic map), each ring is a contour of equal cost — rings closer together mean the surface is steeper there. The green path takes efficient, moderate steps straight toward the center (the global minimum, marked with a star). The blue path creeps along, barely making progress with each tiny step. The red path zigzags wildly back and forth across the valley, each step overshooting the previous one — a textbook picture of a learning rate that's too large._
 
-![Bar chart showing the improvement in cost at each iteration, shrinking over time, with a red dashed threshold line marking epsilon, and a green marker showing where the algorithm detects convergence](https://claude.ai/chat/images/diagram_convergence_epsilon.png)
+![Bar chart showing the improvement in cost at each iteration, shrinking over time, with a red dashed threshold line marking epsilon, and a green marker showing where the algorithm detects convergence](/images/notes/diagram_convergence_epsilon.png)
 
 _Each purple bar is the improvement made by one gradient descent step — how much smaller the cost got compared to the step before. Early on, improvements are large. As the algorithm nears the minimum, each step improves things less and less. Once the improvement drops below the red $\epsilon$ threshold line, the convergence algorithm declares "close enough" and stops — marked by the green dotted line._
 

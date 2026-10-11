@@ -92,7 +92,7 @@ Since Simple Linear Regression sits at the exact crossroads of both traditions, 
 
 If a model has just two parameters (like $\theta_0$ and $\theta_1$ in SLR), you can actually _plot_ the cost function as a 3D surface — a bowl-shaped landscape where the height at any point tells you how bad that particular combination of parameters is. Training a model becomes the process of **walking downhill on this surface** until you reach the lowest point — the bottom of the bowl. This is the intuition gradient descent is built on.
 
-![[diagram_cost_surface_3d.png]]
+![Cost surface 3D](/images/notes/diagram_cost_surface_3d.png)
 
 _Every point on this bowl-shaped surface represents one possible combination of $(\theta_0, \theta_1)$, and its height is the cost $J(\theta_0,\theta_1)$ for that combination. The black trail is gradient descent taking repeated downhill steps, starting from a random point high on the bowl's wall and converging toward the green dot — the global minimum, which is exactly the $(\beta_0, \beta_1)$ pair the closed-form formula would have given you directly._
 
@@ -144,7 +144,7 @@ $$ \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, 
 
 This update rule is repeated over and over — each repetition nudges $\theta_0$ and $\theta_1$ a little closer to the values that minimize $J$.
 
-![[diagram_gradient_descent_1d.png]]
+![Gradient descent 1d](/images/notes/diagram_gradient_descent_1d.png)
 _Simplifying to just one parameter ($\theta_1$) so it fits on a 2D graph: each red arrow is one gradient descent update. Notice the steps get **smaller** as the curve flattens near the bottom — that's because the slope (gradient) itself gets smaller closer to the minimum, so each update naturally shrinks even though $\alpha$ stays fixed._
 
 ### 4.6 Geometric Interpretation
@@ -170,7 +170,7 @@ Different problems need different ways of measuring "wrongness," because not eve
 |**Huber Loss**|Regression, especially with some outliers|Medium — behaves like MAE far away, MSE close up|A hybrid teacher — fair on big misses, strict on small ones|
 
 
-![[diagram_mse_vs_mae.png]]
+![MSE vs MAE](/images/notes/diagram_mse_vs_mae.png)
 
 _Notice the shapes: MSE's penalty (red) curves upward — doubling the error more than doubles the penalty. MAE's penalty (blue) grows in a straight line — doubling the error exactly doubles the penalty. This is precisely why MSE is far more sensitive to outliers than MAE, as explained in the next section._
 

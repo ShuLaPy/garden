@@ -65,7 +65,7 @@ This is the exact same formula as the cost function $J(\theta_0,\theta_1)$ from 
 
 Here's a neat algebraic observation: $y - \hat{y}$, when squared, expands using the identity $(a-b)^2 = a^2 - 2ab + b^2$. This is precisely the structure of a **quadratic equation** — and if you plot a quadratic equation, you get a smooth, bowl-shaped (convex) curve. This bowl shape is exactly the "cost surface" you visualized in your Cost Function and Convergence notes, and it's the reason gradient descent works so cleanly with MSE.
 
-![[mse mae curve shape.png]]
+![MSE MAE curve shape](/images/notes/mse%20mae%20curve%20shape.png)
 
 > Two loss curves side by side: MSE forms a smooth bowl-shaped quadratic curve differentiable everywhere, while MAE forms a V-shape with a sharp kink at zero
 
@@ -83,7 +83,7 @@ _The left curve (MSE) is smooth at every single point, including right at zero �
 
 **Worked example:** Picture your salary-vs-experience data forming a tidy, roughly straight cluster, with a well-fitted best-fit line running through the middle. Now suppose a new data point comes in that's a genuine outlier — say, someone with 9.5 years of experience but a salary far higher than the trend would predict.
 
-![[outlier_impact_mse_vs_mae.png]]
+![Outlier impact MSE vs MAE](/images/notes/outlier_impact_mse_vs_mae.png)
 
 > Two scatter plots comparing how a single outlier shifts the best-fit line under MSE versus MAE; the MSE line swings sharply toward the outlier while the MAE line barely moves
 
@@ -163,7 +163,7 @@ $$ R^2 = 1 - \frac{SS_{res}}{SS_{tot}} $$
 
 **Why this makes sense in plain words:** $\frac{SS_{res}}{SS_{tot}}$ is "how much error your model still has, relative to the dumb baseline's error." Subtracting that fraction from 1 flips it into "how much of the baseline's error your model managed to eliminate."
 
-![[r2_variance_split.png]]
+![R2 variance split](/images/notes/r2_variance_split.png)
 > Bar split into a teal segment labeled R squared 0.66 representing variance explained by the model, and a coral segment labeled 1 minus R squared 0.34 representing variance still unexplained
 
 _Picture the total variance in your salary data as one full bar. Fitting your regression line "explains away" part of that variance (teal) — the rest (coral) is error your line still couldn't account for. R² is simply the teal fraction._

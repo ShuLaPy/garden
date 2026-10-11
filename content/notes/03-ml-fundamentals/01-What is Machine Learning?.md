@@ -188,7 +188,7 @@ This cyclical process is important — ML isn't a "train once and forget" system
 
 It's easy to confuse these three terms, so here's the clear relationship:
 
-![[ai_ml_dl.png]]
+![AI ML DL](/images/notes/ai_ml_dl.png)
 
 
 - **AI** is the broadest field — any technique that makes machines act intelligently (this includes rule-based systems too, not just learning-based ones).

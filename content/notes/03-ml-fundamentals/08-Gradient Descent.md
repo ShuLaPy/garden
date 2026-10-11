@@ -49,7 +49,7 @@ A **parameter** is a dial the model can adjust to change its behavior. For a sim
 
 If you have just _one_ parameter, picture the loss function $J$ as a curve — a bowl shape, like the cross-section of a valley. At any point on that curve, the **slope** tells you two things: which direction is "uphill" (increasing) and how steep it is. If the slope is positive, the curve is going up as you move right, so you should move left to decrease $J$. If the slope is negative, you should move right. This is the whole idea in miniature: **always step in the direction opposite to the slope.**
 
-![[gradient_descent_1d.png]]
+![Gradient descent 1d](/images/notes/gradient_descent_1d.png)
 
 > Gradient descent rolling down a 1D bowl-shaped loss curve, with labeled steps converging toward the minimum
 
@@ -174,7 +174,7 @@ In a single step, the loss dropped from **15** to **0.234**. That's gradient des
 
 With two parameters, the loss surface becomes a 3D bowl, and it's easiest to visualize by looking straight down at it — a **contour plot**, where each ring is a line of equal loss (like elevation lines on a topographic map). The gradient at any point always points directly toward the _nearest_ higher ring (straight uphill, perpendicular to the contour line), so the negative gradient points straight downhill:
 
-![[gd_2d_contour.png]]
+![GD 2d contour](/images/notes/gd_2d_contour.png)
 
 > Contour plot showing the gradient direction (uphill, red) and negative gradient direction (downhill, green) at several points, both perpendicular to the contour lines, pointing toward and away from the minimum
 
@@ -196,7 +196,7 @@ So far, our linear regression example used _all_ the data to compute the gradien
 
 Batch GD gives the cleanest path because it always uses the _true_ average gradient over all the data, while SGD's path is noisy because a single example is often a poor stand-in for the whole dataset — but that noise is also what makes SGD dramatically cheaper per step, and is exactly the trade-off Robbins and Monro's theory (Section 2) showed was still safe on average:
 
-![[gd_variants_paths.png]]
+![GD variants paths](/images/notes/gd_variants_paths.png)
 
 > Contour plot comparing three descent paths from the same starting point: a smooth blue batch gradient descent path, a moderately noisy green mini-batch path, and a very noisy red stochastic gradient descent path, all converging to the same minimum
 
@@ -204,7 +204,7 @@ Batch GD gives the cleanest path because it always uses the _true_ average gradi
 
 **The learning rate is a double-edged sword.** Reusing the 1D bowl $J(\theta) = (\theta-3)^2$ from Section 4.3, watch what happens with three different values of $\alpha$, starting from the same point:
 
-![[learning_rate_comparison.png]]
+![Learning rate comparison](/images/notes/learning_rate_comparison.png)
 
 > Three side-by-side plots comparing gradient descent with a learning rate that is too small (slow crawl), a good learning rate (smooth convergence), and too large (diverging, bouncing to ever-larger values)
 

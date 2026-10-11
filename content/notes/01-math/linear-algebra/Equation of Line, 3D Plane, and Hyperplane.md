@@ -55,7 +55,7 @@ $$\mathbf{w}^T \mathbf{x} + b = 0$$
 
 This is the notation you will see **everywhere** in ML — logistic regression, SVMs, and even the single artificial neuron (the perceptron) all use this exact expression as their foundation. If you've come across the **perceptron** model, this should look familiar: a perceptron computes exactly $\mathbf{w}^T \mathbf{x} + b$, then passes it through an activation function. The "line" you're learning here _is_ the decision boundary a single artificial neuron draws.
 
-![[slope.png]]
+![Slope](/images/notes/slope.png)
 
 ### 3.3 Extending to a 3D Plane
 
@@ -69,7 +69,7 @@ $$\mathbf{w}^T \mathbf{x} + b = 0$$
 
 — it's just that now $\mathbf{w} = (w_1, w_2, w_3)$ and $\mathbf{x} = (x_1, x_2, x_3)$ each have three components instead of two. This is a great illustration of why vector notation is so powerful: the _formula itself never changes_ as dimensions grow — only the size of the vectors inside it does.
 
-![[3d_plane.png]]
+![3D plane](/images/notes/3d_plane.png)
 ### 3.4 Generalizing to N Dimensions: The Hyperplane
 
 Now for the big generalization. What if you have $n$ features instead of just 2 or 3 (very common in real datasets — think of a dataset with 50 columns)? You simply keep extending the pattern:

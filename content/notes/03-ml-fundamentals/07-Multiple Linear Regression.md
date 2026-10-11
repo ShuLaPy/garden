@@ -67,7 +67,7 @@ Nothing new conceptually happens when you go from 1 feature to 10 — you're jus
 |Equation|$y = mx + b$|$y = b_0 + b_1x_1 + \dots + b_px_p$|
 |Example use case|Predict price from size alone|Predict price from size, bedrooms, age, location|
 
-![[simple_vs_multiple.png]]
+![Simple vs multiple](/images/notes/simple_vs_multiple.png)
 
 > Simple regression (size only) vs multiple regression (size + bedrooms) on the same houses
 
@@ -89,7 +89,7 @@ With **2 features**, you're fitting a flat plane through points floating in 3D s
       / x2 (bedrooms)
 ```
 
-![[mlr_3d_plane_fit.png]]
+![MLR 3D plane fit](/images/notes/mlr_3d_plane_fit.png)
 
 > The four houses plotted in 3D with the fitted regression plane
 
@@ -161,7 +161,7 @@ $$SSE = \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
 
 **Why squared?** Two reasons: (1) it turns negative errors (predicted too low) and positive errors (predicted too high) into equally "bad" positive numbers, so they don't cancel out, and (2) it punishes big mistakes much more than small ones — being off by 10 is worse than being off by 1, ten times over even before squaring, and 100 times worse after squaring.
 
-![[residuals_sse.png]]
+![Residuals SSE](/images/notes/residuals_sse.png)
 
 > Residuals: the vertical gaps between actual and predicted price that SSE squares and sums
 
@@ -225,7 +225,7 @@ Every prediction matches perfectly — because this toy data was built from an e
 
 ---
 
-![[mlr_3d_plane_fit 1.png]]
+![MLR 3D plane fit 1](/images/notes/mlr_3d_plane_fit%201.png)
 
 > The exact fitted plane from the worked example|361
 
@@ -249,7 +249,7 @@ Plain Multiple Linear Regression is the starting point, but it has well-known co
 
 ---
 
-![[regularization_shrinkage.png]]
+![Regularization shrinkage](/images/notes/regularization_shrinkage.png)
 
 > Ridge shrinks coefficients toward zero; Lasso can zero them out entirely
 
@@ -257,7 +257,7 @@ Plain Multiple Linear Regression is the starting point, but it has well-known co
 
 ### 7.1 Multicollinearity: When Features Copy Each Other
 
-![[multicollinearity.png]]
+![Multicollinearity](/images/notes/multicollinearity.png)
 
 > Left: two perfectly correlated features. Right: infinitely many (b1, b2) fit equally well
 
@@ -275,7 +275,7 @@ The true rule could be $y = 3x_1$, or equally, $y = 1.5x_2$, or a mix like $y = 
 
 ### 7.2 Overfitting: Too Many Features, Too Little Data
 
-![[overfitting.png]]
+![Overfitting](/images/notes/overfitting.png)
 
 > A simple fit that generalizes vs a high-degree fit that overfits the training points
 
