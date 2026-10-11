@@ -1,0 +1,128 @@
+{{ define "main" }}
+{{- $notes := site.GetPage "/notes" -}}
+{{- $allNotes := slice -}}
+{{- /* Notes = pages inside module folders (skips top-level pages like 00-index) */ -}}
+{{- with $notes }}{{ $allNotes = complement .RegularPages .RegularPagesRecursive }}{{ end -}}
+{{- $modules := slice -}}
+{{- with $notes }}{{ $modules = .Sections.ByWeight }}{{ end -}}
+{{- $stages := dict "seedling" "Seedling" "growing" "Growing" "evergreen" "Evergreen" "planned" "Not started" -}}
+
+<div class="hx:mx-auto hx:flex hextra-max-page-width">
+  {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
+  <main id="content" class="garden-home">
+    {{ partial "custom/page-begin.html" . }}
+
+    {{/* ── Title block ─────────────────────────────── */}}
+    <header class="garden-hero">
+      {{ with .Params.kicker }}<p class="garden-kicker">{{ . }}</p>{{ end }}
+      <h1 class="garden-headline">{{ .Params.headline | default .Title }}</h1>
+      {{ with .Params.intro }}<p class="garden-intro">{{ . }}</p>{{ end }}
+      <div class="garden-actions">
+        {{ with .Params.startLink }}
+          <a class="garden-start" href="{{ relURL (strings.TrimPrefix "/" .) }}">{{ $.Params.startText | default "Start reading" }} <span aria-hidden="true">→</span></a>
+        {{ end }}
+        <button type="button" class="garden-search" data-search-open>
+          Search notes <kbd>/</kbd>
+        </button>
+      </div>
+      {{- $updated := "" -}}
+      {{- with $allNotes.ByLastmod.Reverse }}{{ $updated = (index . 0).Lastmod }}{{ end -}}
+      <p class="garden-meta">
+        {{ len $modules }} modules · {{ len $allNotes }} notes
+        {{- with $updated }}{{ if not .IsZero }} · updated {{ .Format (site.Params.dateFormat | default "January 2, 2006") }}{{ end }}{{ end }}
+      </p>
+    </header>
+
+    <div class="garden-grid">
+      {{/* ── Contents ─────────────────────────────── */}}
+      <section class="garden-contents" aria-labelledby="garden-contents-title">
+        <div class="garden-label-row">
+          <h2 id="garden-contents-title" class="garden-label">Contents</h2>
+          <ul class="garden-legend" aria-label="Growth stages">
+            {{ range slice "seedling" "growing" "evergreen" }}
+              <li>{{ partial "garden/stage-icon.html" . }} {{ index $stages . }}</li>
+            {{ end }}
+          </ul>
+        </div>
+
+        <ol class="garden-modules">
+          {{ range $i, $m := $modules }}
+            {{- $pages := where $m.Pages.ByWeight "Kind" "page" -}}
+            {{- $pages = $pages | append (where $m.Pages.ByWeight "Kind" "section") -}}
+            {{- $count := len $m.RegularPagesRecursive -}}
+
+            {{- /* Module stage: explicit `status`, otherwise derived from its notes */ -}}
+            {{- $stage := $m.Params.status -}}
+            {{- if not $stage -}}
+              {{- if eq $count 0 -}}
+                {{- $stage = "planned" -}}
+              {{- else -}}
+                {{- $evergreen := where $m.RegularPagesRecursive "Params.status" "evergreen" -}}
+                {{- $stage = cond (eq (len $evergreen) $count) "evergreen" "growing" -}}
+              {{- end -}}
+            {{- end -}}
+
+            {{- $num := index (split $m.File.ContentBaseName "-") 0 -}}
+            {{- if not (findRE `^\d+$` $num) }}{{ $num = printf "%02d" (add $i 1) }}{{ end -}}
+
+            <li class="garden-module{{ if eq $count 0 }} is-empty{{ end }}">
+              <span class="garden-num">{{ $num }}</span>
+              <div class="garden-module-body">
+                <h3 class="garden-module-title"><a href="{{ $m.RelPermalink }}">{{ $m.Title }}</a></h3>
+                {{ if $count }}
+                  <ul class="garden-topics">
+                    {{ range first 6 $pages }}
+                      <li><a href="{{ .RelPermalink }}">{{ partial "garden/stage-icon.html" (.Params.status | default "growing") }}{{ .LinkTitle }}</a></li>
+                    {{ end }}
+                    {{ if gt (len $pages) 6 }}
+                      <li class="garden-more"><a href="{{ $m.RelPermalink }}">+{{ sub (len $pages) 6 }} more</a></li>
+                    {{ end }}
+                  </ul>
+                {{ else }}
+                  <p class="garden-planned">{{ delimit ($m.Params.planned | default (slice "Notes coming soon")) " · " }}</p>
+                {{ end }}
+              </div>
+              <span class="garden-badge garden-badge-{{ $stage }}">
+                {{ if ne $stage "planned" }}{{ partial "garden/stage-icon.html" $stage }}{{ end }}
+                {{ if $count }}{{ $count }} {{ cond (eq $count 1) "note" "notes" }}{{ else }}soon{{ end }}
+              </span>
+            </li>
+          {{ end }}
+        </ol>
+      </section>
+
+      {{/* ── Recently added ─────────────────────────── */}}
+      <aside class="garden-recent" aria-labelledby="garden-recent-title">
+        <div class="garden-label-row">
+          <h2 id="garden-recent-title" class="garden-label">Recently added</h2>
+        </div>
+        <ul class="garden-recent-list">
+          {{ range first 5 $allNotes.ByDate.Reverse }}
+            {{- $page := . -}}
+            {{- $module := "" -}}
+            {{- range .Ancestors }}{{ if and .Parent (eq .Parent.RelPermalink $notes.RelPermalink) }}{{ $module = .Title }}{{ end }}{{ end -}}
+            <li>
+              <a href="{{ .RelPermalink }}">
+                <span class="garden-recent-title">{{ .Title }}</span>
+                <span class="garden-recent-meta">
+                  {{- with $module }}{{ . }}{{ end -}}
+                  {{- if not .Date.IsZero }}{{ with $module }} · {{ end }}{{ .Date.Format "Jan 2" }}{{ end -}}
+                </span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+
+        {{ with .Params.formula }}
+          <figure class="garden-formula">
+            {{ with try (transform.ToMath . (dict "displayMode" true)) }}{{ with .Value }}{{ . }}{{ end }}{{ end }}
+            {{ with $.Params.formulaCaption }}<figcaption>{{ . }}</figcaption>{{ end }}
+          </figure>
+        {{ end }}
+      </aside>
+    </div>
+
+    {{ partial "custom/page-end.html" . }}
+  </main>
+</div>
+{{ end }}

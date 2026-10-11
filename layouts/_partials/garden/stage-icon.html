@@ -1,0 +1,12 @@
+{{- /* Growth-stage icon. Context: "seedling" | "growing" | "evergreen" */ -}}
+{{- $stage := . | default "growing" -}}
+<svg class="garden-stage-icon garden-stage-{{ $stage }}" viewBox="0 0 16 16" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  {{- if eq $stage "seedling" -}}
+    <path d="M8 14V9"/><path d="M8 9c0-2.2-1.6-3.6-4-3.6 0 2.2 1.6 3.6 4 3.6Z"/><path d="M8 9c0-2.2 1.6-3.6 4-3.6 0 2.2-1.6 3.6-4 3.6Z"/>
+  {{- else if eq $stage "evergreen" -}}
+    <path d="M8 1.8 3.5 8h2L3 11.8h10L10.5 8h2L8 1.8Z"/><path d="M8 11.8V14.5"/>
+  {{- else -}}
+    <path d="M8 14.5V6"/><path d="M8 10c0-2.4-1.8-4-4.5-4 0 2.4 1.8 4 4.5 4Z"/><path d="M8 7c0-2.6 1.8-4.6 4.6-4.6 0 2.6-1.8 4.6-4.6 4.6Z"/>
+  {{- end -}}
+</svg>
+{{- /**/ -}}

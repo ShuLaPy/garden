@@ -1,0 +1,535 @@
+/* ==========================================================================
+   AIML Garden — reading-first theme overrides for Hextra
+   ========================================================================== */
+
+:root {
+  /* Fonts */
+  --garden-font-ui: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --garden-font-read: "Source Serif 4", "Iowan Old Style", Charter, Georgia, serif;
+  --garden-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --hx-font-sans: var(--garden-font-ui);
+  --hx-font-mono: var(--garden-font-mono);
+
+  /* Paper-like backgrounds instead of pure white / pure black */
+  --hx-color-white: #fbfaf7;
+  --hx-color-dark: #14161a;
+
+  /* Accent: deep teal ("garden") */
+  --primary-hue: 172deg;
+  --primary-saturation: 70%;
+  --primary-lightness: 34%;
+
+  /* Reading measure (~70 characters per line) */
+  --hextra-max-content-width: 46rem;
+
+  --garden-text: #2b2d31;
+  --garden-muted: #5f6368;
+  --garden-rule: rgb(0 0 0 / 0.08);
+  --garden-surface: rgb(15 118 110 / 0.05);
+}
+
+.dark {
+  --primary-hue: 168deg;
+  --primary-saturation: 55%;
+  --primary-lightness: 55%;
+
+  --garden-text: #d7d9de;
+  --garden-muted: #9aa0a8;
+  --garden-rule: rgb(255 255 255 / 0.09);
+  --garden-surface: rgb(94 234 212 / 0.06);
+}
+
+html {
+  font-family: var(--garden-font-ui);
+  font-feature-settings: "cv11", "ss01";
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: hsl(var(--primary-hue) 70% 50% / 0.22);
+}
+
+/* --------------------------------------------------------------------------
+   Article body
+   -------------------------------------------------------------------------- */
+
+.content {
+  color: var(--garden-text);
+  font-family: var(--garden-font-read);
+  font-size: 1.125rem;          /* 18px */
+  line-height: 1.75;
+  font-optical-sizing: auto;
+  hanging-punctuation: first;
+}
+
+/* Paragraph rhythm */
+.content :where(p):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  margin-top: 1.15em;
+  line-height: 1.75;
+}
+
+/* Headings stay in the UI sans for clear hierarchy */
+.content :where(h1, h2, h3, h4, h5, h6) {
+  font-family: var(--garden-font-ui);
+  letter-spacing: -0.015em;
+  scroll-margin-top: 5rem;
+}
+main h1 {
+  font-family: var(--garden-font-ui);
+  letter-spacing: -0.025em;
+}
+.content :where(h2):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  font-size: 1.6rem;
+  margin-top: 2.75rem;
+  padding-bottom: 0.4rem;
+  border-color: var(--garden-rule);
+}
+.content :where(h3):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  font-size: 1.3rem;
+  margin-top: 2.25rem;
+}
+.content :where(h4):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  font-size: 1.1rem;
+  margin-top: 1.75rem;
+}
+
+/* Links */
+.content :where(a):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness) / 0.4);
+  transition: text-decoration-color 0.15s ease;
+}
+.content :where(a):not(:where([class~=not-prose], [class~=not-prose] *)):hover {
+  text-decoration-color: currentColor;
+}
+
+/* Lists */
+.content :where(ul, ol):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  margin-top: 1em;
+}
+.content :where(li):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  margin-block: 0.35em;
+}
+.content :where(li)::marker {
+  color: var(--garden-muted);
+}
+
+/* Emphasis */
+.content strong {
+  font-weight: 650;
+  color: inherit;
+}
+
+/* Blockquotes: calm, not italic */
+.content :where(blockquote):not(:where([class~=not-prose], [class~=not-prose] *)) {
+  font-style: normal;
+  color: var(--garden-muted);
+  border-color: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness) / 0.5);
+  border-left-width: 3px;
+  padding: 0.1rem 0 0.1rem 1.25rem;
+}
+
+/* Horizontal rule */
+.content hr {
+  border: 0;
+  height: 1px;
+  background: var(--garden-rule);
+  margin: 3rem 0;
+}
+
+/* Inline + block code */
+.content code,
+.content pre,
+.content kbd {
+  font-family: var(--garden-font-mono);
+  font-variant-ligatures: none;
+}
+.content :where(code):not(:where(.hextra-code-block code, pre code, [class~=not-prose], [class~=not-prose] *)) {
+  font-size: 0.82em;
+  padding: 0.12em 0.38em;
+  border-radius: 0.375rem;
+}
+.content pre {
+  font-size: 0.85rem;
+  line-height: 1.65;
+}
+
+/* Tables: sans, compact, readable */
+.content :where(table):not(:where(.hextra-code-block table, [class~=not-prose], [class~=not-prose] *)) {
+  font-family: var(--garden-font-ui);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* Callouts, cards, details and tabs read better in the UI font */
+.content .hextra-callout,
+.content .hextra-cards,
+.content .hextra-card,
+.content details summary,
+.content .hextra-tabs-toggle,
+.content .hextra-steps h3 {
+  font-family: var(--garden-font-ui);
+}
+.content .hextra-callout {
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+/* Math (KaTeX) */
+.content .katex {
+  font-size: 1.08em;
+}
+.content .katex-display {
+  margin: 1.5rem 0;
+  padding: 0.75rem 0.5rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* Images */
+.content img {
+  border-radius: 0.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Chrome: sidebar, TOC, footer
+   -------------------------------------------------------------------------- */
+
+.hextra-sidebar-container {
+  font-size: 0.92rem;
+}
+.hextra-toc {
+  font-size: 0.85rem;
+}
+.hextra-footer {
+  font-size: 0.85rem;
+  background: transparent !important;
+  border-top: 1px solid var(--garden-rule);
+}
+/* The navbar already has a theme toggle, so drop the footer's duplicate row */
+.hextra-footer > div:has(.hextra-theme-toggle),
+.hextra-footer > hr {
+  display: none;
+}
+.hextra-footer > div:last-child {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 640px) {
+  .content {
+    font-size: 1.0625rem;       /* 17px on phones */
+    line-height: 1.7;
+  }
+}
+
+@media print {
+  .content {
+    font-size: 11pt;
+    color: #000;
+  }
+}
+
+/* ==========================================================================
+   Landing page (layouts/home.html)
+   ========================================================================== */
+
+.garden-home {
+  --garden-accent: hsl(var(--primary-hue) var(--primary-saturation) calc(var(--primary-lightness) * 0.9));
+  width: 100%;
+  min-width: 0;
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 5rem;
+  color: var(--garden-text);
+}
+.dark .garden-home {
+  --garden-accent: hsl(var(--primary-hue) var(--primary-saturation) var(--primary-lightness));
+}
+
+/* Title block */
+.garden-hero {
+  max-width: 44rem;
+  margin-bottom: 4rem;
+}
+.garden-kicker {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--garden-accent);
+}
+.garden-headline {
+  margin-top: 1rem;
+  font-family: var(--garden-font-read) !important;
+  font-size: clamp(2.25rem, 5vw, 3.4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em !important;
+  color: var(--garden-text);
+  text-wrap: balance;
+}
+.garden-intro {
+  margin-top: 1.25rem;
+  font-family: var(--garden-font-read);
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: var(--garden-muted);
+  text-wrap: pretty;
+}
+.garden-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.75rem;
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+.garden-start {
+  font-weight: 500;
+  color: var(--garden-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  transition: text-decoration-color 0.15s ease;
+}
+.garden-start:hover {
+  text-decoration-color: currentColor;
+}
+.garden-start span {
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+.garden-start:hover span {
+  transform: translateX(3px);
+}
+.garden-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--garden-muted);
+  cursor: pointer;
+}
+.garden-search:hover {
+  color: var(--garden-text);
+}
+.garden-search kbd {
+  font-family: var(--garden-font-mono);
+  font-size: 0.75rem;
+  padding: 0 0.4rem;
+  border: 1px solid var(--garden-rule);
+  border-radius: 0.3rem;
+}
+.garden-meta {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--garden-muted);
+  opacity: 0.85;
+}
+
+/* Two-column grid */
+.garden-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3.5rem;
+}
+@media (min-width: 960px) {
+  .garden-grid {
+    grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+    gap: 4rem;
+  }
+}
+
+/* Section labels */
+.garden-label-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--garden-text) 22%, transparent);
+}
+.garden-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--garden-muted);
+}
+.garden-legend {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.78rem;
+  color: var(--garden-muted);
+}
+.garden-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Growth-stage icons */
+.garden-stage-icon {
+  flex: none;
+  color: var(--garden-accent);
+}
+.garden-stage-seedling { opacity: 0.75; }
+
+/* Module rows */
+.garden-module {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto;
+  gap: 0 1rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--garden-rule);
+}
+.garden-module:last-child {
+  border-bottom: 0;
+}
+.garden-num {
+  font-family: var(--garden-font-read);
+  font-size: 1.6rem;
+  line-height: 1.1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: color-mix(in srgb, var(--garden-muted) 70%, transparent);
+}
+.garden-module-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+}
+.garden-module-title a {
+  color: var(--garden-text);
+  transition: color 0.15s ease;
+}
+.garden-module-title a:hover {
+  color: var(--garden-accent);
+}
+.garden-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.25rem;
+  margin-top: 0.6rem;
+  font-family: var(--garden-font-read);
+  font-size: 1rem;
+}
+.garden-topics a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--garden-muted);
+  transition: color 0.15s ease;
+}
+.garden-topics a:hover {
+  color: var(--garden-text);
+}
+.garden-more a {
+  font-family: var(--garden-font-ui);
+  font-size: 0.85rem;
+  color: var(--garden-accent);
+}
+.garden-planned {
+  margin-top: 0.6rem;
+  font-family: var(--garden-font-read);
+  font-style: italic;
+  color: color-mix(in srgb, var(--garden-muted) 80%, transparent);
+}
+.garden-module.is-empty .garden-module-title a {
+  color: var(--garden-muted);
+}
+
+/* Count / stage badge */
+.garden-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: start;
+  margin-top: 0.15rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  color: var(--garden-muted);
+  background: var(--garden-surface);
+}
+.garden-badge-evergreen,
+.garden-badge-growing {
+  color: var(--garden-accent);
+}
+.garden-badge-planned {
+  background: transparent;
+  border: 1px dashed var(--garden-rule);
+}
+
+/* Recently added */
+.garden-recent-list li {
+  border-bottom: 1px solid var(--garden-rule);
+}
+.garden-recent-list a {
+  display: block;
+  padding: 1rem 0;
+}
+.garden-recent-title {
+  display: block;
+  font-family: var(--garden-font-read);
+  font-size: 1.05rem;
+  line-height: 1.4;
+  color: var(--garden-text);
+  transition: color 0.15s ease;
+}
+.garden-recent-list a:hover .garden-recent-title {
+  color: var(--garden-accent);
+}
+.garden-recent-meta {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.78rem;
+  color: var(--garden-muted);
+}
+
+/* Formula ornament */
+.garden-formula {
+  margin-top: 2rem;
+  padding: 1.25rem 1rem 1rem;
+  border: 1px solid var(--garden-rule);
+  border-radius: 0.75rem;
+  text-align: center;
+  color: var(--garden-text);
+}
+.garden-formula .katex-display {
+  margin: 0;
+}
+.garden-formula .katex {
+  font-size: 1.15em;
+}
+.garden-formula figcaption {
+  margin-top: 0.75rem;
+  font-family: var(--garden-font-read);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--garden-muted);
+}
+
+@media (max-width: 640px) {
+  .garden-home {
+    padding-top: 2.5rem;
+  }
+  .garden-hero {
+    margin-bottom: 3rem;
+  }
+  .garden-module {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+  .garden-badge {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 0.75rem;
+  }
+  .garden-legend {
+    gap: 0.75rem;
+  }
+}

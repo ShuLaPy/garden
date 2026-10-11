@@ -1,0 +1,14 @@
+{{- /* Typography: Inter for UI & headings, Source Serif 4 for reading, JetBrains Mono for code */ -}}
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..700;1,8..60,400..600&display=swap"
+/>
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)" />
+{{- /* Hextra only loads KaTeX CSS when it sees math in the page body; math inside
+       shortcodes like tabs can be missed. `math: true` in front matter forces it. */ -}}
+{{- if and .Params.math (not (.Page.Store.Get "hasMath")) (eq (site.Params.math.engine | default "katex") "katex") }}
+  {{ partialCached "scripts/katex.html" . }}
+{{- end }}
